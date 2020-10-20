@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be6b096eaab28f64aa6687a810f67b0b, type: 3}
+  m_Name: Sedan
+  m_EditorClassIdentifier: 
+  carName: Sedan
+  carCost: 1000
+  colorOptions:
+  - {fileID: 2100000, guid: b4dbc16f019b20c49afe6a16734a9599, type: 2}
+  - {fileID: 2100000, guid: 62b51903d47a5b54e80f1d24e3a0cd72, type: 2}
+  - {fileID: 2100000, guid: 399d8dd41224318498b86f95f48f267a, type: 2}
