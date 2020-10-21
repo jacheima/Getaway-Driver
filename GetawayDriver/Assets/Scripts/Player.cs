@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     private float zSpeed;
     private float xSpeed;
 
-    private int scoreBase;
+    private int scoreBase = 20;
     private int coinsValue = 1;
 
     public float speedMultiplier = 1;
@@ -50,8 +50,6 @@ public class Player : MonoBehaviour
     {
         zSpeed = GetComponent<PlayerController>().zSpeed;
         xSpeed = GetComponent<PlayerController>().xSpeed;
-
-        scoreBase = GameManager.instance.scoreBase;
 
         //PlayerPrefs.DeleteAll();
 
@@ -214,6 +212,11 @@ public class Player : MonoBehaviour
     public float GetZSpeed()
     {
         return zSpeed;
+    }
+
+    public void SetZSpeed(float newZSpeed)
+    {
+        zSpeed = newZSpeed;
     }
 
     public float GetXSpeed()

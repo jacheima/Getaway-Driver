@@ -17,7 +17,7 @@ public class ScoreMultiplier : Pickup
 
             if(timer <= 0)
             {
-                GameManager.instance.AdjustMultiplier(multiplier);
+                //GameManager.instance.AdjustMultiplier(multiplier);
                 Destroy(this.gameObject);
             }
         }
@@ -30,20 +30,15 @@ public class ScoreMultiplier : Pickup
             GetComponent<Renderer>().enabled = false;
             GetComponent<Collider>().enabled = false;
 
-            multiplier = GameManager.instance.scoreMultiplier;
+            multiplier = GameManager.instance.scoreManager.scoreMod;
 
-            GameManager.instance.AdjustMultiplier((multiplier * 2));
+            //GameManager.instance.AdjustMultiplier((multiplier * 2));
 
             timer = GameManager.instance.upgrades.upgradedDurations[GameManager.instance.player.scoreModUpgradeCount];
-
-            Debug.Log("Timer = " + timer);
 
             Debug.Log(GameManager.instance.upgrades.upgradedDurations[GameManager.instance.player.scoreModUpgradeCount]);
 
             startCountdown = true;
-
-            Debug.Log("The gameManager multiplier is: " + GameManager.instance.scoreMultiplier);
-            Debug.Log("The previous muliplier was: " + multiplier);
         }
     }
 }

@@ -18,12 +18,12 @@ public class GameManager : MonoBehaviour
     public GameState currentGameState;
     private GameState previousGameState;
 
-    public int scoreBase;
+
 
     public Player player;
-    public float scoreMultiplier;
 
-    private float score;
+    public SpeedManager speedManager;
+    public ScoreManager scoreManager;
 
     private int hearts;
     private int coins = 0;
@@ -172,8 +172,6 @@ public class GameManager : MonoBehaviour
         unpauseTimer = countdownStart;
         countdDownAnimator = countdownText.gameObject.GetComponent<Animator>();
 
-        scoreMultiplier = player.GetScoreModifier();
-
         hearts = 0;
 
         gameoverTimer = gameOverCount;
@@ -188,7 +186,6 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         UpdateUI();
-        ScorePlayer();
 
         if (startCountdown)
         {
@@ -278,7 +275,7 @@ public class GameManager : MonoBehaviour
 
             EnableMovement();
 
-            scoreBase = player.GetScoreBase();
+            scoreManager.scoreBase = player.GetScoreBase();
 
             music.Play();
 
@@ -297,29 +294,19 @@ public class GameManager : MonoBehaviour
         hearts++;
     }
 
-    public void AdjustMultiplier(float newMultiplyer)
-    {
-        scoreMultiplier = newMultiplyer;
-    }
 
-    public void ScorePlayer()
-    {
-        score += scoreBase * scoreMultiplier * Time.deltaTime;
-    }
+    
 
     public void SavePlayer()
     {
-        player.SavePlayer((int)score, coins, hearts);
+        player.SavePlayer((int)scoreManager.score, coins, hearts);
     }
 
 
     private void UpdateUI()
     {
-        scoreText.text = ((int)score).ToString();
-        coinText.text = coins.ToString();
-        multiplierText.text = "x" + scoreMultiplier;
 
-        Debug.Log("Score Multiplier: " + scoreMultiplier);
+        coinText.text = coins.ToString();
 
         highScoreText.text = player.GetScore().ToString();
 
@@ -378,7 +365,7 @@ public class GameManager : MonoBehaviour
     {
         DisableMovement();
 
-        scoreBase = 0;
+        scoreManager.scoreBase = 0;
 
         pauseUI.SetActive(true);
         levelUI.SetActive(false);
@@ -549,7 +536,7 @@ public class GameManager : MonoBehaviour
             if (used <= 3)
             {
                 player.RemoveScoreBoost();
-                scoreMultiplier += 5;
+                scoreManager.scoreMod += 5;
                 used++;
             }
             else
@@ -679,7 +666,7 @@ public class GameManager : MonoBehaviour
 
         DisableMovement();
 
-        scoreBase = 0;
+        scoreManager.scoreBase = 0;
 
         adsManager.interstitial.Show();
 
@@ -709,10 +696,10 @@ public class GameManager : MonoBehaviour
 
         //reset all of the level counters
         coins = 0;
-        score = 0;
+        scoreManager.score = 0;
         hearts = 0;
-        scoreMultiplier = player.GetScoreModifier();
-        scoreBase = player.GetScoreBase();
+        scoreManager.scoreMod = player.GetScoreModifier();
+        scoreManager.scoreBase = player.GetScoreBase();
 
         timerFill.fillAmount = 1f;
 

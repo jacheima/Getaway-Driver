@@ -26,6 +26,12 @@ public class ChopShop : MonoBehaviour
 
     Car currentCar;
 
+    private void Start()
+    {
+        currentCar = availableCars[0];
+        transform.position = startPosition;
+    }
+
     private void Update()
     {
         if (scrollCar)
